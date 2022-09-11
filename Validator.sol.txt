@@ -1,0 +1,51 @@
+pragma solidity >=0.7.0 <0.9.0;
+
+
+contract Verification{
+
+
+
+    bool result = false;
+
+    uint256 validCheckSum = 69;
+
+    uint256 expectedRentParameter = 1;
+
+    uint256 expectedMonthlyParameter = 2;
+
+    function setMonth(uint256 monthlyIncomeParameter)public returns(bool){
+        
+
+        expectedMonthlyParameter = monthlyIncomeParameter;
+
+        return true;
+
+    }
+
+    function setRent(uint256 rentParameter)public returns(bool){
+        expectedRentParameter = rentParameter;
+        return true;
+    }
+
+    function showParameters()public view returns(uint256,uint256){
+        return(expectedRentParameter,expectedMonthlyParameter);
+    }
+
+    function checkSum(uint256 value)private view returns(bool){
+            if(value == validCheckSum){
+                return true;
+            }
+
+            return false;
+
+    }
+
+    function verifyProof(uint256 circuitChecksum, uint256 rentParameter, uint256 monthlyIncomeParameter)public view returns (bool){
+        if(checkSum(circuitChecksum) && expectedMonthlyParameter == monthlyIncomeParameter && expectedRentParameter == rentParameter){
+            return true;
+        }
+
+        return false;
+        
+    }
+}
